@@ -23,6 +23,7 @@ body[data-theme='dark'] {
   --colors-bg: hsl(207, 26%, 17%);
   --colors-ui-base: hsl(209, 23%, 22%);
   --shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  --colors_link: hsl(0, 0%, 100%);
 }
 
 body[data-theme='light'] {
@@ -30,6 +31,7 @@ body[data-theme='light'] {
   --colors-bg: hsl(0, 0%, 98%);
   --colors-ui-base: hsl(0, 0%, 100%);
   --shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  --colors-link: hsl(200, 15%, 8%);
 }
 
 body {
@@ -38,4 +40,12 @@ body {
   color: var(--colors-text);
   font-weight: var(--fw-light);
   background-color: var(--colors-bg);
+}
+
+a{
+  text-decoration: none;
+  color: #000;
+}
+a:active{
+  color: #000;
 }

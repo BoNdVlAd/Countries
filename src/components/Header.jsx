@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from './Container';
 import styled from 'styled-components';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -15,8 +16,8 @@ const Wrapper = styled.div`
   padding: 2rem 0;
 `;
 
-const Title = styled.a.attrs({
-  href: '/',
+const Title = styled(Link).attrs({
+  to: '/home',
 })`
   color: var(--color);
   font-size: var(--fs-sm);
@@ -40,6 +41,7 @@ const Header = () => {
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
+
     // save color_theme to local storage
     localStorage.setItem('theme_choose', theme === 'light' ? 'dark' : 'light');
   };

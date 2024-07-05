@@ -4,31 +4,39 @@ import { ALL_COUNTRIES } from '../config';
 import List from '../components/List';
 import Card from '../components/Card';
 import Controls from '../components/Controls';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import {AllCountriesContext} from '../App.jsx'
 
 const HomePage = () => {
-  const [countries, setCountries] = React.useState([]);
-  console.log(countries);
+  const [countries, setCountries] = useOutletContext()
+  const [filteredCountries, setfilteredCountries] = React.useState(countries);
 
-  const { navigate } = useNavigate();
+
+  const handleSearch = (search, region) => {
+    let data = [...countries]
+    if(region){
+      data = data.filter(c => c.region.includes(region))
+    }
+    if(search){
+      data = data.filter(c => c.name.common.toLowerCase().includes(search.toLowerCase()))
+    }
+    setfilteredCountries(data)
+  }
+
 
   React.useEffect(() => {
-    axios.get(ALL_COUNTRIES).then(({ data }) => setCountries(data));
+    if(!countries.length){
+      axios.get(ALL_COUNTRIES).then(({ data }) => setCountries(data));
+    }
+    console.log('rerender')
   }, []);
 
-  const handleClickOnCard = (name) => {
-    console.log('hello');
-    console.log(name);
-    navigate('details');
-  };
 
   return (
     <>
-      <Controls />
-      <button onClick={() => handleClickOnCard('vlad')} type=""></button>
-
+      <Controls onSearch = {handleSearch}/>
       <List>
-        {countries.map((c) => {
+      {filteredCountries.map((c) => {
           const countryInfo = {
             img: c.flags.png,
             name: c.name.common,

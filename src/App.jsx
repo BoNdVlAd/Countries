@@ -1,18 +1,12 @@
 import './App.css';
-import Controls from './components/Controls';
 import Header from './components/Header';
 import Main from './components/Main';
-import axios from 'axios';
-import React from 'react';
-import { ALL_COUNTRIES } from './config';
-import List from './components/List';
-import Card from './components/Card';
+import React, { createContext } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { HomePage } from './pages/HomePage';
-import NotFound from './pages/NotFound';
-import Details from './pages/Details';
 
 function App() {
+  console.log('render App')
+  const [countries, setCountries] = React.useState([])
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -23,7 +17,7 @@ function App() {
       <Header />
       <Main>
         <div id="detail">
-          <Outlet />
+          <Outlet context={[countries, setCountries]}/>
         </div>
       </Main>
     </>
